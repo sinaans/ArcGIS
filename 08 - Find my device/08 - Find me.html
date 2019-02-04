@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://js.arcgis.com/3.20/esri/css/esri.css">
+		<script src="https://js.arcgis.com/3.20/"></script>
+		
+		<title>Find My Device</title>
+
+		<script>
+			var map;
+			require(["esri/map", "esri/dijit/LocateButton", "dojo/domReady!"], function(Map, LocateButton) {
+				map = new Map("map1", {
+				center: [-122.4479, 37.7531],
+				zoom: 12,
+				basemap: "streets"
+				});
+			
+				var myLocation = new LocateButton({map: map}, "LocateButton");
+				myLocation.startup();
+				myLocation.scale = 150000;
+				myLocation.centerAt(true);
+			});
+		</script>
+
+		<style>
+			html, body, #map1 {
+				padding: 0;
+				margin: 0;
+				height: 100%;
+				width: 100%;
+			}
+			#LocateButton {
+				position: absolute;
+				top: 100px;
+				left: 20px;
+				z-index: 10;
+			}
+		</style>
+
+	</head>
+	<body>
+		<div id="map1"></div>
+		<div id="LocateButton"></div>
+	</body>
+</html>

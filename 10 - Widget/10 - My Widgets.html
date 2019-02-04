@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://js.arcgis.com/3.20/esri/css/esri.css">
+		<script src="https://js.arcgis.com/3.20/"></script>
+
+		<title>My Widgets Page</title>
+
+		<script>
+			var map;
+			require(["esri/map", "esri/dijit/Search", "dojo/domReady!"], function(Map, Search) {
+					map = new Map("map1", {
+					center: [-122.4479, 37.7531],
+					zoom: 12,
+					basemap: "streets"
+				});
+				var search = new Search({
+					map: map,
+					enableButtonMode: true,
+					enableHighlight: true,
+					enableLabel: true
+					}, "search");
+					search.startup();
+			});
+		</script>
+
+		<style>
+			html, body, #map1 {
+				padding: 0;
+				margin: 0;
+				height: 100%;
+				width: 100%;
+			}
+			#search {
+				display: block;
+				position: absolute;
+				z-index: 90;
+				top: 20px;
+				right: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="map1"></div>
+		<div id="search"></div>
+	</body>
+</html>

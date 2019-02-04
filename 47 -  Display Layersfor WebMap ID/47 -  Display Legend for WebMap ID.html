@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Display legend WebMap App</title>
+
+		<link rel="stylesheet" href="https://js.arcgis.com/3.20/esri/css/esri.css">
+		<script src="https://js.arcgis.com/3.20/"></script>
+
+		<script>
+			var map;
+			require(["esri/map", "dijit/layout/ContentPane", "esri/dijit/Legend", "dojo/parser", "esri/arcgis/utils", "dojo/domReady!"], function(Map, ContentPane, Legend,  parser, arcgisUtils) {
+				parser.parse();
+				// map = new Map("map1", {
+				// 	center: [101.654745, 3.119609],
+				// 	zoom: 16,
+				// 	basemap: "topo-vector"
+				// });
+
+				arcgisUtils.createMap("17d4fbe27e714a068ef349f26876f028","map1").then(function(response){
+					map = response.map;
+
+				var legendLayers = arcgisUtils.getLegendLayers(response);
+				var myLegend = new Legend({
+					map: map,
+					layerInfos: legendLayers
+				},"legend1");
+				myLegend.startup();
+
+				});
+			});
+		</script>
+
+		<style>
+			html, body, #map1 {
+				padding: 0;
+				margin: 0;
+				height: 100%;
+				width: 100%;
+			}
+
+			#legendContainer {
+				background: #fff;
+				opacity: 0.80;
+				position: absolute;
+				font-family: arial;
+				height: auto;
+				width: 140px;
+				right: 20px;
+				margin: 5px;
+				padding: 10px;
+				top: 40px;
+				border: solid 1px;
+				border-color: gray;
+				border-radius: 5px;
+				z-index: 50;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div id="map1"></div>
+
+		<div id="legendContainer" >
+			<div data-dojo-type="dijit/layout/ContentPane" id="legendInfo">Polygon Legend
+				<div id="legend1"></div>
+			</div>
+		</div>
+
+	</body>
+</html>

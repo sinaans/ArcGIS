@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Add Retrived Location</title>
+
+		<link rel="stylesheet" href="https://js.arcgis.com/3.20/esri/css/esri.css">
+		<script src="https://js.arcgis.com/3.20/"></script>
+
+		<script>
+			var map;
+			require(["esri/map", "esri/dijit/BookmarkItem", "esri/dijit/Bookmarks", "dojo/domReady!"], function(Map, BookmarkItem, Bookmarks) {
+				map = new Map("map1", {
+				center: [-122.4479, 37.7531],
+				zoom: 12,
+				basemap: "streets"
+				});
+
+
+				map.on("click", myClickOnMap);
+					function myClickOnMap(event) {
+						alert(" The current extent is: xmax: "+ map.extent.xmax + " xmin: " + map.extent.xmin + " ymax: " + map.extent.ymax + " ymin: " + map.extent.ymin);
+						alert(" the spatial ref is: " + map.spatialReference.wkid );
+					}
+				var myBookMarkItems = [
+					{
+						"extent": {
+							"spatialReference": {"wkid": 102100},
+							"xmax": -12414915.849259336,
+							"xmin": -12506716.720229708,
+							"ymax": 5005979.500874258,
+							"ymin": 4952626.4551312765
+						},
+						"name": "Salt Lake City"
+					},
+					{
+					"extent": {
+						"spatialReference": {"wkid": 102100},
+						"xmax": -13058706.719990985,
+						"xmin": -13242308.46193205,
+						"ymax": 4072148.3263145555,
+						"ymin": 3965442.234828409
+						},
+						"name": "Long Beach"
+					},
+					{
+					"extent": {
+						"spatialReference": {"wkid": 102100},
+						"xmax": -13607887.65896286,
+						"xmin": -13653788.094448049,
+						"ymax": 4557943.859580746,
+						"ymin": 4531267.336709255
+						},
+						"name": "San Francisco"
+					},
+					{
+					"extent": {
+						"spatialReference": {"wkid": 102100},
+						"xmax": -13473071.850324962,
+						"xmin": -13564872.721295334,
+						"ymax": 4686090.537500775,
+						"ymin": 4632737.491757794
+						},
+						"name": "Sacramento"
+					}, 
+					{
+					"extent": {
+						"spatialReference": {"wkid": 102100},
+						"xmax": 11320656.48555436,
+						"xmin": 11311484.04215989,
+						"ymax": 350279.163820406,
+						"ymin": 345802.8203513382
+						},
+						"name": "University of Malaya"
+					}
+				];
+				var bookmarks = new Bookmarks({
+					map: map,
+					bookmarks: myBookMarkItems,
+					editable: true
+					}, "bookmarks");
+					bookmarks.startup();
+			});
+		</script>
+
+		<style>
+			html, body, #map1 {
+				padding: 0;
+				margin: 0;
+				height: 100%;
+				width: 100%;
+			}
+			#bookmarks {
+				position: absolute;
+				top: 100px;
+				left: 20px;
+				padding: 2px;
+				background: #fffde7;
+				border-radius: 5px;
+				border: 1px solid #607d8b;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div id="map1"></div>
+		<div id="bookmarks"></div>
+	</body>
+</html>

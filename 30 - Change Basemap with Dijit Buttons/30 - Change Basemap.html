@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Change Basemap</title>
+
+		<link rel="stylesheet" href="https://js.arcgis.com/3.20/dijit/themes/claro/claro.css">
+		<link rel="stylesheet" href="https://js.arcgis.com/3.20/esri/css/esri.css">
+		<script src="https://js.arcgis.com/3.20/"></script>
+
+		<script>
+			var map;
+			require(["esri/map", "dijit/form/Button", "dijit/layout/BorderContainer","dijit/layout/ContentPane", "dojo/domReady!"], function(Map, Button) {
+				map = new Map("map1", {
+					center: [-122.4479, 37.7531],
+					zoom: 12,
+					basemap: "streets"
+				});
+				
+				var button1 = new Button({
+						onClick: function () {map.setBasemap("satellite");}
+				}, "myButton1");
+				button1.startup();
+
+				var button2 = new Button({
+					onClick: function () {map.setBasemap("topo-vector");}
+				}, "myButton2");
+				button2.startup();
+
+				var button3 = new Button({
+					onClick: function () {map.setBasemap("streets");}
+				}, "myButton3");
+				button3.startup();
+				
+
+			});
+		</script>
+
+		<style>
+			html, body, #map1 {
+				padding: 0;
+				margin: 0;
+				height: 100%;
+				width: 100%;
+			}
+			
+			#buttonContainer {
+				background: #fff;
+				opacity: 0.80;
+				position: absolute;
+				font-family: arial;
+				height: auto;
+				width: 100px;
+				right: 20px;
+				margin: 5px;
+				padding: 10px;
+				top: 20px;
+				border: solid 1px;
+				border-color: gray;
+				border-radius: 5px;
+				z-index: 50;
+			}
+			#myButton1, #myButton2, #myButton3{
+				background: #00e676;
+				width: 90px;
+			}
+		</style>
+
+	</head>
+
+	<body class="claro">
+		<div id="map1"></div>
+
+		<div id="buttonContainer" >
+			<div id="buttonContainerInfo">
+				<div id="buttonGeneral">Functional Buttons</div>
+
+				<button id="myButton1" data-dojo-type="dijit/form/Button">Satellite</button>
+
+				<button id="myButton2" data-dojo-type="dijit/form/Button">Topo-vector</button>
+
+				<button id="myButton3" data-dojo-type="dijit/form/Button">Streets</button>
+			</div>
+		</div>
+	</body>
+</html>
